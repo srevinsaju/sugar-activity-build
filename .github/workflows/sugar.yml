@@ -46,7 +46,7 @@ jobs:
         echo 'Sugar Installed'
     - name: Clone 100 activities
       run: |
-        curl -s https://$GITHUB_AT:@api.github.com/orgs/connectedcars/repos?per_page=200 | jq .[].ssh_url | xargs -n 1 git clone
+        curl -s https://$GITHUB_AT:@api.github.com/orgs/connectedcars/repos?per_page=200 | jq .[].clone_url | xargs -n 1 git clone
         
         
 
