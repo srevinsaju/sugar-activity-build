@@ -1,0 +1,47 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Download sugar and install 
+      run: |
+        for module in sugar{-datastore,-artwork,-toolkit,-toolkit-gtk3,}; do
+            git clone https://github.com/sugarlabs/$module.git
+        done
+        sudo apt update
+        for module in sugar{-datastore,-artwork,-toolkit,-toolkit-gtk3,}; do
+            sudo apt build-dep $module
+        done
+        sudo apt install python{,3}-six python3-empy
+        for module in sugar{-artwork,-toolkit-gtk3,-datastore,}; do
+            cd $module
+            ./autogen.sh --with-python3 --prefix=/usr
+            make
+            sudo make install
+            cd ..
+        done
+        echo 'Sugar Installed'
+        
+        
+
