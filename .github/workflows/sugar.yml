@@ -31,7 +31,7 @@ jobs:
             git clone https://github.com/sugarlabs/$module.git
         done
         sudo apt update
-        for module in sugar{-datastore,-artwork,-toolkit,-toolkit-gtk3,}; do
+        for module in sugar{-datastore,-artwork,-toolkit-gtk3,}; do
             sudo apt build-dep $module
         done
         sudo apt install python{,3}-six python3-empy
