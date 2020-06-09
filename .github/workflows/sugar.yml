@@ -70,12 +70,9 @@ jobs:
         export ORGS="sugarlabs"
         export ORGS_CLONE_ON="enable"
         export LOCATION="$(realpath .)/activities"
-        python3 github-archive/src/github_archive.py
         mkdir activities
-        cd activities
-        echo "cloning first100";
-        curl -s -u ${ACCESS_TOKEN}:x-oauth-basic 'https://api.github.com/orgs/sugarlabs/repos?per_page=400' | jq '.[].cgit_url' -r | while read url; do git clone "$url"; done
-        cd ..
+        python3 github-archive/src/github_archive.py
+        
         
     - name: Get tools
       run: |
