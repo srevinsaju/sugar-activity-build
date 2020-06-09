@@ -89,7 +89,7 @@ jobs:
         cd sugarappstore
         git checkout oop-ss
         echo "checking out oop-ss"
-        python -m saasbuild -i ../activities -l -b -g -p ../sugarappstore-static
+        python3 -m saasbuild -i ../activities -l -b -g -p ../sugarappstore-static
         tar -czvf saas.tar.gz ./saas_compiled
         cd ..
         
