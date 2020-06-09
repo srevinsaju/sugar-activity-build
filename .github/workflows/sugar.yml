@@ -63,14 +63,14 @@ jobs:
       env: 
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
-        export PATH=$PATH:$SUGAR_PATH
-        export TOKEN=$ACCESS_TOKEN
-        export USER_CLONE_ON="disable"
-        export USER_PULL_ON="disable"
-        export ORGS="sugarlabs"
-        export ORGS_CLONE_ON="enable"
-        export LOCATION="$(realpath .)/activities"
-        export LOG_LIFE="30"
+        echo PATH=$PATH:$SUGAR_PATH
+        echo "TOKEN=$ACCESS_TOKEN" > github-archive/src/.env
+        echo "USER_CLONE_ON='disable'" >> github-archive/src/.env 
+        echo "USER_PULL_ON='disable'" >> github-archive/src/.env 
+        echo "ORGS='sugarlabs'" >> github-archive/src/.env 
+        echo "ORGS_CLONE_ON='enable'" >> github-archive/src/.env 
+        echo "LOCATION='$(realpath .)/activities'" >> github-archive/src/.env 
+        echo "LOG_LIFE='30'" >> github-archive/src/.env 
         mkdir activities
         python3 github-archive/src/github_archive.py
         
