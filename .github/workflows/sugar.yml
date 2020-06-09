@@ -53,15 +53,19 @@ jobs:
         echo $(which sugar-activity)
         
     - name: Test Sugar
+      env: 
+        SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
       run: |
         echo $PYTHONPATH
         echo $PATH
         
         python3 -c "import sugar3"
     - name: Clone 100 activities
-      env:
+      env: 
+        SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
+        export PYTHONPATH=$PYTHONPATH:SUGAR_PATH
         mkdir activities
         cd activities
         echo "cloning first100";
@@ -69,7 +73,10 @@ jobs:
         cd ..
         
     - name: Get tools
+      env: 
+        SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
       run: |
+        export PYTHONPATH=$PYTHONPATH:SUGAR_PATH
         echo "clone static"
         git clone https://github.com/sugarlabs-appstore/sugarappstore-static
         git clone https://github.com/sugarlabs-appstore/sugarappstore/
