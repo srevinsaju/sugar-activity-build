@@ -66,7 +66,7 @@ jobs:
         echo PATH=$PATH:$SUGAR_PATH
         echo "TOKEN=$ACCESS_TOKEN" > github-archive/src/.env
         echo 'GISTS_CLONE_ON="disable"' >> github-archive/src/.env
-        echo 'GISTS_PULL_ON="disable"; >> github-archive/src/.env
+        echo 'GISTS_PULL_ON="disable"' >> github-archive/src/.env
         echo "USER_CLONE_ON='disable'" >> github-archive/src/.env 
         echo "USER_PULL_ON='disable'" >> github-archive/src/.env 
         echo "ORGS='sugarlabs'" >> github-archive/src/.env 
