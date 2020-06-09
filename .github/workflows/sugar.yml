@@ -77,7 +77,7 @@ jobs:
         echo 'BRANCH="master"' >> github-archive/src/.env
         mkdir activities
         python3 github-archive/src/github_archive.py
-        
+        rm -r activities/repos/sugarlabs/musicblocks activities/repos/sugarlabs/sugarizer
     - name: Get tools
       run: |
         export PATH=$PATH:$SUGAR_PATH
