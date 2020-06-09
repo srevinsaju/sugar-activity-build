@@ -44,6 +44,12 @@ jobs:
             cd ..
         done
         echo 'Sugar Installed'
+        echo $(which sugar-activity)
+        
+    - name: Test Sugar
+      run: |
+        python3 -c "import jarabe"
+        python3 -c "import sugar3"
     - name: Clone 100 activities
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -51,7 +57,20 @@ jobs:
         mkdir activities
         cd activities
         echo "cloning first100";
-        curl -u "srevinsaju:${ACCESS_TOKEN}" -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?access_token=${ACCESS_TOKEN} | jq '.[].clone_url' | xargs -n 1 git clone;
-
+        curl -u "srevinsaju:${ACCESS_TOKEN}" -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?per_page=400&access_token=${ACCESS_TOKEN} | jq '.[].clone_url' | xargs -n 1 git clone;
+        cd ..
+        
+    - name: Get tools
+      run: |
+        echo "clone static"
+        git clone https://github.com/sugarlabs-appstore/sugarappstore-static
+        git clone https://github.com/sugarlabs-appstore/sugarappstore/
+        cd sugarappstore
+        git checkout oop-ss
+        echo "checking out oop-ss"
+        python -m saasbuild -i ../activities -l -b -g -p ../sugarappstore-static
+        
+        
+        
         
 
