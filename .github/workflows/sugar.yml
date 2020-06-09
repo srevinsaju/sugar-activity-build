@@ -43,6 +43,8 @@ jobs:
             sudo make install
             cd ..
         done
+        ls /usr/lib/python3.8/site-packages
+        sudo mkdir -p /usr/lib/python3.8/dist-packages
         sudo mv /usr/lib/python3.8/site-packages/jarabe /usr/lib/python3.8/dist-packages/.
         sudo mv /usr/lib/python3.8/site-packages/carquinyol /usr/lib/python3.8/dist-packages/.
         echo 'Sugar Installed'
