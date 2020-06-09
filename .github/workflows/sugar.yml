@@ -45,17 +45,13 @@ jobs:
         done
         echo 'Sugar Installed'
     - name: Clone 100 activities
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         mkdir activities
         cd activities
         echo "cloning first100";
-        curl -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?page=1&per_page=100 | jq '.[].clone_url' | xargs -n 1 git clone;
-        echo "cloning 100-200";
-        curl -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?page=2&per_page=100 | jq '.[].clone_url' | xargs -n 1 git clone;
-        echo "cloning 200-300";
-        curl -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?page=3&per_page=100 | jq '.[].clone_url' | xargs -n 1 git clone;
-        echo "cloning 300-till";
-        curl -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?page=4&per_page=100 | jq '.[].clone_url' | xargs -n 1 git clone;
-        
+        curl -u "srevinsaju:${ACCESS_TOKEN}" -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?access_token=${ACCESS_TOKEN} | jq '.[].clone_url' | xargs -n 1 git clone;
+
         
 
