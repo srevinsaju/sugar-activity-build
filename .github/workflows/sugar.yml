@@ -40,7 +40,9 @@ jobs:
             sudo make install
             cd ..
         done
-
+        sudo cp -r /usr/lib/python3.6/site-packages/sugar3 /usr/lib/python3.6/dist-packages/.
+        sudo cp -r /usr/lib/python3.6/site-packages/jarabe /usr/lib/python3.6/dist-packages/.
+        sudo cp -r /usr/lib/python3.6/site-packages/carquinyol /usr/lib/python3.6/dist-packages/.
         echo 'Sugar Installed'
         echo $(which sugar-activity)
         
