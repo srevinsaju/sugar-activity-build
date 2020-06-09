@@ -23,7 +23,8 @@ jobs:
         pip3 install empy
     - name: Setup cloner
       run: |
-        git clone https://github.com/Justintime50/github-archive
+        git clone https://github.com/srevinsaju/github-archive
+        git checkout patch-1
         cd github-archive
         pip3 install -r requirements.txt
         
