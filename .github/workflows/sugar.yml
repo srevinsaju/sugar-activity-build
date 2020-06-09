@@ -1,6 +1,7 @@
 # Sugar Build System
+# (c) Srevin Saju 2020. All rights reserved 
+# Licensed under MIT OSI License
 # Continuous Integration to clone all the activities and then create a bundle
-
 
 name: Sugar Build 
 
@@ -12,11 +13,8 @@ on:
 
 jobs:
   buildxo:
-
     runs-on: ubuntu-latest
-
     steps:
-
     - name: Install dependencies
       run: |
         sudo apt install python3-pip python3-setuptools python3-dev
