@@ -56,6 +56,7 @@ jobs:
       env: 
         SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
       run: |
+        export PYTHONPATH=$PYTHONPATH:SUGAR_PATH
         echo $PYTHONPATH
         echo $PATH
         
