@@ -40,23 +40,19 @@ jobs:
             sudo make install
             cd ..
         done
-        ls ~/.local/lib/python3.8/site-packages
 
         echo 'Sugar Installed'
         echo $(which sugar-activity)
         
     - name: Test Sugar
-      env: 
-        SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
+
       run: |
-        export PATH=$PATH:$SUGAR_PATH
         echo $PYTHONPATH
         echo $PATH
         
         python3 -c "import sugar3"
     - name: Clone 100 activities
       env: 
-        SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
         export PATH=$PATH:$SUGAR_PATH
@@ -67,8 +63,6 @@ jobs:
         cd ..
         
     - name: Get tools
-      env: 
-        SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
       run: |
         export PATH=$PATH:$SUGAR_PATH
         echo "clone static"
