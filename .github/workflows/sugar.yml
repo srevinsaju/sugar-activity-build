@@ -70,6 +70,7 @@ jobs:
         export ORGS="sugarlabs"
         export ORGS_CLONE_ON="enable"
         export LOCATION="$(realpath .)/activities"
+        export LOG_LIFE="30"
         mkdir activities
         python3 github-archive/src/github_archive.py
         
