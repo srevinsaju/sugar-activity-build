@@ -62,8 +62,7 @@ jobs:
         mkdir activities
         cd activities
         echo "cloning first100";
-        curl -u "srevinsaju:${ACCESS_TOKEN}" -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?per_page=400&access_token=${ACCESS_TOKEN} > items.json
-        cat items.json | jq '.[].clone_url' | xargs -n 1 git clone;
+        curl -u ${ACCESS_TOKEN}:x-oauth-basic 'https://api.github.com/orgs/sugarlabs/repos?per_page=400' | jq '.[].cgit_url' -r | while read url; do git clone "$url"; done
         cd ..
         
     - name: Get tools
