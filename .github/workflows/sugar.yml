@@ -56,7 +56,7 @@ jobs:
       env: 
         SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
       run: |
-        export PYTHONPATH=$PYTHONPATH:SUGAR_PATH
+        export PATH=$PATH:$SUGAR_PATH
         echo $PYTHONPATH
         echo $PATH
         
@@ -66,7 +66,7 @@ jobs:
         SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       run: |
-        export PYTHONPATH=$PYTHONPATH:SUGAR_PATH
+        export PATH=$PATH:$SUGAR_PATH
         mkdir activities
         cd activities
         echo "cloning first100";
@@ -77,7 +77,7 @@ jobs:
       env: 
         SUGAR_PATH: '/usr/lib/python3.8/dist-packages/'
       run: |
-        export PYTHONPATH=$PYTHONPATH:SUGAR_PATH
+        export PATH=$PATH:$SUGAR_PATH
         echo "clone static"
         git clone https://github.com/sugarlabs-appstore/sugarappstore-static
         git clone https://github.com/sugarlabs-appstore/sugarappstore/
