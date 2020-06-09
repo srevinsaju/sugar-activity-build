@@ -88,9 +88,11 @@ jobs:
         git checkout oop-ss
         echo "checking out oop-ss"
         pip3 install -r requirements.txt
+        ls ../activities
         python3 -m saasbuild -i $(realpath ../activities) -l -b -g -p ../sugarappstore-static
         tar -czvf saas.tar.gz ./saas_compiled
         cd ..
+        tar -czvf amazingbundle-xo.tar.gz ./activities
         
     - name: Release
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -101,3 +103,5 @@ jobs:
         title: "Continuous"
         files: |
           sugarappstore/saas.tar.gz
+          amazingbundle-xo.tar.gz
+          
