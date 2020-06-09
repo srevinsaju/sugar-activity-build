@@ -62,7 +62,8 @@ jobs:
         mkdir activities
         cd activities
         echo "cloning first100";
-        curl -u "srevinsaju:${ACCESS_TOKEN}" -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?per_page=400&access_token=${ACCESS_TOKEN} | jq '.[].clone_url' | xargs -n 1 git clone;
+        curl -u "srevinsaju:${ACCESS_TOKEN}" -s https://$GITHUB_AT:@api.github.com/orgs/sugarlabs/repos?per_page=400&access_token=${ACCESS_TOKEN} > items.json
+        cat items.json | jq '.[].clone_url' | xargs -n 1 git clone;
         cd ..
         
     - name: Get tools
@@ -75,8 +76,21 @@ jobs:
         git checkout oop-ss
         echo "checking out oop-ss"
         python -m saasbuild -i ../activities -l -b -g -p ../sugarappstore-static
+        tar -czvf saas.tar.gz ./saas_compiled
+        cd ..
         
         
+    - name: Release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: "Development Build"
+        files: |
+          sugarappstore/saas.tar.gz
+
+
         
         
 
