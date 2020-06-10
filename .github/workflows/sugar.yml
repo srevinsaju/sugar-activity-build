@@ -43,6 +43,13 @@ jobs:
             sudo make install
             cd ..
         done
+        for module in sugar{-artwork,-toolkit-gtk3,-datastore,}; do
+            cd $module
+            ./autogen.sh --with-python2 --prefix=/usr
+            make
+            sudo make install
+            cd ..
+        done
         sudo mkdir -p /usr/lib/python3.6/dist-packages
         sudo cp -r /usr/lib/python3.6/site-packages/sugar3 /usr/lib/python3.6/dist-packages/.
         sudo cp -r /usr/lib/python3.6/site-packages/jarabe /usr/lib/python3.6/dist-packages/.
