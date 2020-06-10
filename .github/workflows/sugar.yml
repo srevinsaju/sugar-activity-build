@@ -94,7 +94,7 @@ jobs:
         echo "checking out oop-ss"
         pip3 install -r requirements.txt
         ls ../activities
-        python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -l -b -g -p ../sugarappstore-static -u
+        python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -b -g -p ../sugarappstore-static -u
         tar -czvf saas.tar.gz ./saas_compiled
         cd ..
 
