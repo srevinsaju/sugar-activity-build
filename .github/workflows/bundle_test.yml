@@ -22,7 +22,6 @@ jobs:
     
     - name: Checkout current repository
       uses: actions/checkout@v2
-      fetch-depth: 0
 
     - name: Download sugar and install 
       run: |
