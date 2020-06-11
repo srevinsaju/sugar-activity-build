@@ -1,0 +1,90 @@
+# Sugar Build System
+# (c) Srevin Saju 2020. All rights reserved 
+# Licensed under MIT OSI License
+# Continuous Integration to clone all the activities and then create a bundle
+
+name: Sugar Bundle Pre-merge Deploy Test 
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  buildxo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt install python3-pip python3-setuptools python3-dev
+        python3 -m pip install --upgrade pip
+        pip3 install empy
+        
+    - name: Download sugar and install 
+      run: |
+        sudo sed -i '/deb-src/s/^# //' /etc/apt/sources.list
+        for module in sugar{-datastore,-artwork,-toolkit,-toolkit-gtk3,}; do
+            git clone https://github.com/sugarlabs/$module.git
+        done
+        sudo apt update
+        for module in sugar{-datastore,-artwork,-toolkit-gtk3,}; do
+            sudo apt build-dep $module
+        done
+        sudo apt install python{,3}-six python3-empy
+        for module in sugar{-artwork,-toolkit-gtk3,-datastore,}; do
+            cd $module
+            ./autogen.sh --with-python3 --prefix=/usr
+            make
+            sudo make install
+            cd ..
+        done
+        for module in sugar{-artwork,-toolkit-gtk3,-datastore,}; do
+            cd $module
+            ./autogen.sh --with-python2 --prefix=/usr
+            make
+            sudo make install
+            cd ..
+        done
+        sudo mkdir -p /usr/lib/python3.6/dist-packages
+        sudo cp -r /usr/lib/python3.6/site-packages/sugar3 /usr/lib/python3.6/dist-packages/.
+        sudo cp -r /usr/lib/python3.6/site-packages/jarabe /usr/lib/python3.6/dist-packages/.
+        sudo cp -r /usr/lib/python3.6/site-packages/carquinyol /usr/lib/python3.6/dist-packages/.
+        echo 'Sugar Installed'
+        echo $(which sugar-activity)
+        
+    - name: Test Sugar
+
+      run: |
+        echo $PYTHONPATH
+        echo $PATH
+        
+        python3 -c "import sugar3"
+    
+    - name: Clone the new activity
+      run: |
+        mkdir activities
+        cd activities
+        for i in $(cat $(git diff master.. --name-only)); do
+          git clone $i
+        done
+        cd ..
+    
+    - name: Get tools
+      run: |
+        export PATH=$PATH:$SUGAR_PATH
+        echo "clone static"
+        git clone https://github.com/sugarlabs-appstore/sugarappstore-static
+        git clone https://github.com/sugarlabs-appstore/sugarappstore/
+        cd sugarappstore
+        git checkout oop-ss
+        echo "checking out oop-ss"
+        pip3 install -r requirements.txt
+        ls ../activities
+        python3 -m saasbuild -i $(realpath ../activities) -b -g -p ../sugarappstore-static -u
+        tar -czvf saas.tar.gz ./saas_compiled
+        cd ..
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: bundle-xo
+        path: sugarappstore/saas_compiled/bundles/
+  
