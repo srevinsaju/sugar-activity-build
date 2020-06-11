@@ -75,7 +75,7 @@ jobs:
       run: |
         mkdir activities
         cd activities
-        for i in $(cat ../x/diff); do
+        for i in $(cat ../x/$(cat ../x/diff_file)); do
           git clone $i
         done
         cd ..
