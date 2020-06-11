@@ -24,8 +24,7 @@ jobs:
       run: |
         git clone https://github.com/${{ github.repository }} x
         cd x
-        git fetch
-        git pull
+        git fetch --all
         git checkout ${{ github.ref }}
         git diff master.. > diff_file
 
