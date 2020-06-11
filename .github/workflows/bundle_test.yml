@@ -22,7 +22,7 @@ jobs:
     
     - name: Checkout current repository
       run: |
-        git clone ${{ github.repository }} x
+        git clone https://github.com/${{ github.repository }} x
         cd x
         git checkout ${{ github.sha }}
         git diff master.. > diff_file
