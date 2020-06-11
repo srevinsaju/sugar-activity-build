@@ -20,7 +20,7 @@ jobs:
       uses: thollander/actions-comment-pull-request@master
       with:
         message: |
-            Hello! Thanks for adding this activity. 
+            Hello! :wave: Thanks for adding this activity. 
             You will be mentioned if the build completes successfully. 
             *Only builds that complete successfully will be merged.*
 
