@@ -7,7 +7,10 @@ name: Sugar Bundle Pre-merge Deploy Test
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: 
+        - 'master'
+    paths:
+        - 'bundles/**'
 
 jobs:
   buildxo:
@@ -17,8 +20,12 @@ jobs:
       run: |
         sudo apt install python3-pip python3-setuptools python3-dev
         python3 -m pip install --upgrade pip
-        pip3 install empy
-        
+        python3 -m pip install empy
+    
+    - name: Checkout current repository
+      uses: actions/checkout@v2
+      fetch-depth: 0
+
     - name: Download sugar and install 
       run: |
         sudo sed -i '/deb-src/s/^# //' /etc/apt/sources.list
@@ -77,14 +84,22 @@ jobs:
         cd sugarappstore
         git checkout oop-ss
         echo "checking out oop-ss"
-        pip3 install -r requirements.txt
+        python3 -m pip install -r requirements.txt
         ls ../activities
+        echo "checking if the activity is visible"
+        python3 -m saasbuild -i $(realpath ../activities) -l
+        echo "building bundle and regenerating appstore"
         python3 -m saasbuild -i $(realpath ../activities) -b -g -p ../sugarappstore-static -u
+        echo "Compressing and prepareing for upload"
         tar -czvf saas.tar.gz ./saas_compiled
         cd ..
 
     - uses: actions/upload-artifact@v2
       with:
-        name: bundle-xo
-        path: sugarappstore/saas_compiled/bundles/
-  
+        name: bundle-xo.xo
+        path: sugarappstore/saas_compiled/bundles/**
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: SAAS_sugar-activtiy-store.tar.gz
+        path: sugarappstore/saas.tar.gz

@@ -7,7 +7,15 @@ name: Sugar Build
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+        - 'master'
+    paths:
+        - '.github/workflows/sugar.yml'
+  pull_request:
+    branches: 
+        - 'master'
+    paths:
+        - '.github/workflows/sugar.yml'
 
 jobs:
   buildxo:
@@ -17,13 +25,13 @@ jobs:
       run: |
         sudo apt install python3-pip python3-setuptools python3-dev
         python3 -m pip install --upgrade pip
-        pip3 install empy
+        python3 -m install empy
     - name: Setup cloner
       run: |
         git clone https://github.com/srevinsaju/github-archive
         cd github-archive
         git checkout patch-1
-        pip3 install -r requirements.txt
+        python3 -m pip install -r requirements.txt
         
     - name: Download sugar and install 
       run: |
@@ -92,7 +100,7 @@ jobs:
         cd sugarappstore
         git checkout oop-ss
         echo "checking out oop-ss"
-        pip3 install -r requirements.txt
+        python3 -m pip install -r requirements.txt
         ls ../activities
         python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -b -g -p ../sugarappstore-static -u
         tar -czvf saas.tar.gz ./saas_compiled
