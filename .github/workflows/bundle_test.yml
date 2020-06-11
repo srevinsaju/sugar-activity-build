@@ -28,7 +28,8 @@ jobs:
         git fetch origin ${{ github.ref }}
         git checkout FETCH_HEAD
         git diff master.. > diff_file
-
+        echo "received diff ++ "
+        cat diff_file
 
     - name: Download sugar and install 
       run: |
