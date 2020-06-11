@@ -21,9 +21,12 @@ jobs:
         python3 -m pip install empy
     
     - name: Checkout current repository
-      uses: actions/checkout@v2
-      with: 
-        fetch-depth: 0
+      run: |
+        git clone ${{ github.repository }} x
+        cd x
+        git checkout ${{ github.sha }}
+        git diff master.. > diff_file
+
 
     - name: Download sugar and install 
       run: |
@@ -69,7 +72,7 @@ jobs:
       run: |
         mkdir activities
         cd activities
-        for i in $(cat $(git diff master.. --name-only)); do
+        for i in $(cat ../x/diff); do
           git clone $i
         done
         cd ..
