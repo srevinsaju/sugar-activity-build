@@ -9,11 +9,23 @@ on:
   pull_request:
     branches: 
         - 'master'
+    paths:
+        - 'bundles/**'
 
 jobs:
   buildxo:
     runs-on: ubuntu-latest
     steps:
+    - name: Announce
+      uses: thollander/actions-comment-pull-request@master
+      with:
+        message: |
+            Hello! Thanks for adding this activity. 
+            You will be mentioned if the build completes successfully. 
+            *Only builds that complete successfully will be merged.*
+
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Install dependencies
       run: |
         sudo apt install python3-pip python3-setuptools python3-dev
@@ -108,3 +120,12 @@ jobs:
       with:
         name: SAAS_sugar-activtiy-store.tar.gz
         path: sugarappstore/saas.tar.gz
+
+
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@master
+      with:
+        message: |
+            @${{ github.actor }}! :tada:
+            Build succeeded! 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
