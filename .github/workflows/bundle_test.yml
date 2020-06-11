@@ -27,7 +27,7 @@ jobs:
         git fetch --all
         git fetch origin ${{ github.ref }}
         git checkout FETCH_HEAD
-        git diff master.. > diff_file
+        git diff master.. --name-only > diff_file
         echo "received diff ++ "
         cat diff_file
 
