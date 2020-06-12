@@ -3,7 +3,6 @@
 # Licensed under MIT OSI License
 # Continuous Integration to clone all the activities and then create a bundle
 
-
 name: Sugar Build 
 
 on:
