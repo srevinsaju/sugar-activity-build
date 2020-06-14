@@ -1,6 +1,6 @@
 ![Sugar App Store logo](https://raw.githubusercontent.com/sugarlabs-appstore/appstore-assets/22a34f9d134a526f1cb8ce49059d8a140ae885f9/sugarappstore.svg)
 
-# sugar-activity-build
+# sugar-activity-build ![Sugar Build](https://github.com/srevinsaju/sugar-activity-build/workflows/Sugar%20Build/badge.svg)
 A simple continuous integration tool that clones all repositories from `sugarlabs/` and then builds a sugar activity bundle, aka `.xo`
 
 ## Adding your Bundles (.xo)
