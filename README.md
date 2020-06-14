@@ -5,10 +5,14 @@ A simple continuous integration tool that clones all repositories from `sugarlab
 
 ## Adding your Bundles (.xo)
 Adding your bundles are easy; Just click the following file and add the exact url 
-To your git repositort (all git links are supported)
-The provided link should include a `activity/activity.info` file
+To your git repository (all git links are supported)
+The provided link should include a `activity/activity.info` file.
 
 #### [Click to add your bundle here](https://github.com/srevinsaju/sugar-activity-build/new/master/bundles)
+
+GitHub links are scanned and then cloned. `git submodules` are not supported however.
+The `bot` will automatically mention you, in case the build completes successfully.
+See [#6](https://github.com/srevinsaju/sugar-activity-build/pull/6) for a sample PR not intended to be merged, and left open as a sample for contributors.
 
 ## Download all the bundles
 All the Bundles are built on an Ubuntu 18.04 LTS Build Image provided by GitHub actions. 
