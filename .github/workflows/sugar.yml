@@ -42,7 +42,7 @@ jobs:
             git clone https://github.com/sugarlabs/$module.git
         done
         sudo apt update
-        for module in sugar{-datastore,-artwork,-toolkit-gtk3,}; do
+        for module in sugar{-datastore,-artwork,-toolkit,-toolkit-gtk3,}; do
             sudo apt build-dep $module
         done
         sudo apt install python{,3}-six python3-empy
@@ -53,13 +53,15 @@ jobs:
             sudo make install
             cd ..
         done
-        for module in sugar{-artwork,-toolkit-gtk3,-datastore,}; do
+
+        for module in sugar{-toolkit,-toolkit-gtk3}; do
             cd $module
             ./autogen.sh --with-python2 --prefix=/usr
             make
             sudo make install
             cd ..
         done
+
         sudo mkdir -p /usr/lib/python3.6/dist-packages
         sudo cp -r /usr/lib/python3.6/site-packages/sugar3 /usr/lib/python3.6/dist-packages/.
         sudo cp -r /usr/lib/python3.6/site-packages/jarabe /usr/lib/python3.6/dist-packages/.
