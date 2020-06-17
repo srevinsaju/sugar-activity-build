@@ -38,7 +38,7 @@ jobs:
     - name: Download sugar and install 
       run: |
         sudo sed -i '/deb-src/s/^# //' /etc/apt/sources.list
-        for module in sugar{-datastore,-artwork,-toolkit,-toolkit-gtk3,}; do
+        for module in sugar{-datastore,-artwork,-toolkit-gtk3,}; do
             git clone https://github.com/sugarlabs/$module.git
         done
         sudo apt update
@@ -54,14 +54,14 @@ jobs:
             cd ..
         done
 
-        for module in sugar{-toolkit,-toolkit-gtk3}; do
+        for module in sugar{-toolkit-gtk3}; do
             cd $module
             ./autogen.sh --with-python2 --prefix=/usr
             make
             sudo make install
             cd ..
         done
-
+        sudo apt install python-sugar
         sudo mkdir -p /usr/lib/python3.6/dist-packages
         sudo cp -r /usr/lib/python3.6/site-packages/sugar3 /usr/lib/python3.6/dist-packages/.
         sudo cp -r /usr/lib/python3.6/site-packages/jarabe /usr/lib/python3.6/dist-packages/.
