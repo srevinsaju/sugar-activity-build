@@ -58,7 +58,6 @@ jobs:
         make
         sudo make install
         cd ..
-        done
         sudo apt install python-sugar
         sudo mkdir -p /usr/lib/python3.6/dist-packages
         sudo cp -r /usr/lib/python3.6/site-packages/sugar3 /usr/lib/python3.6/dist-packages/.
