@@ -53,13 +53,11 @@ jobs:
             sudo make install
             cd ..
         done
-
-        for module in sugar{-toolkit-gtk3}; do
-            cd $module
-            ./autogen.sh --with-python2 --prefix=/usr
-            make
-            sudo make install
-            cd ..
+        cd sugar-toolkit-gtk3
+        ./autogen.sh --with-python2 --prefix=/usr
+        make
+        sudo make install
+        cd ..
         done
         sudo apt install python-sugar
         sudo mkdir -p /usr/lib/python3.6/dist-packages
