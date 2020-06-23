@@ -21,6 +21,10 @@ will be releaxed once development on static files ceases. The tar.gz also includ
 static website resources which was used to build the 
 [sugarappstore](https://sugarstore.netlify.app) which is continuously deployed to upstream
 
+## Flatpaks
+If you / someone else created a flatpak, which is not recognized by the generator as a Flatpak, then please 
+create a Pull Request to update the Flatpak database on [sugarlabs-appstore/sugarappstore](https://github.com/sugarlabs-appstore/sugarappstore/blob/oop-ss/saasbuild/data/flatpak.json).
+
 Check out [Releases](https://github.com/srevinsaju/sugar-activity-build/releases/tag/latest) to download a release asset which is periodical basis.
 
 ## Copyright
