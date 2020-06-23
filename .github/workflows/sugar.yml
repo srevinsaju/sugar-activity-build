@@ -120,4 +120,8 @@ jobs:
           sugarappstore/saas_compiled/index.json
           sugarappstore/saas_compiled/sitemap.xml
 
-          
+    - name: Trigger Build on Netlify
+      env:
+        NETLIFY: ${{ secrets.NETLIFY_TOKEN }}
+      run: |
+        curl -X POST -d {} $NETLIFY
