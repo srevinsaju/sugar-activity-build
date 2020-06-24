@@ -103,7 +103,7 @@ jobs:
         echo "checking out oop-ss"
         python3 -m pip install -r requirements.txt
         ls ../activities
-        python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -fbguy -p ../sugarappstore-static -x https://sugarstore.netlify.app
+        python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -fsbguy -p ../sugarappstore-static -x https://sugarstore.netlify.app
         tar -czvf saas.tar.gz ./saas_compiled
         cd ..
 
