@@ -7,7 +7,7 @@ name: Sugar Build
 
 on:
   schedule:
-    - cron: "5 */2 * * *"
+    - cron: "5 */12 * * *"
   push:
     branches: 
         - 'master'
