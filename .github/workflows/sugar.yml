@@ -99,8 +99,8 @@ jobs:
         git clone https://github.com/sugarlabs-appstore/sugarappstore-static
         git clone https://github.com/sugarlabs-appstore/sugarappstore/
         cd sugarappstore
-        git checkout oop-ss
-        echo "checking out oop-ss"
+        git checkout dev
+        echo "checking out dev"
         python3 -m pip install -r requirements.txt
         ls ../activities
         python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -fsbguy -p ../sugarappstore-static -x https://sugarstore.netlify.app
