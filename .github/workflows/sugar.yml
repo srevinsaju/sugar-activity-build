@@ -106,8 +106,7 @@ jobs:
         python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -Pvfsbguyz -p ../sugarappstore-static -x https://sugarstore.netlify.app
         tar -czvf saas.tar.gz ./saas_compiled
         cd ..
-
-        
+ 
     - name: Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
