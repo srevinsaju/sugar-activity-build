@@ -99,7 +99,6 @@ jobs:
         git clone https://github.com/sugarlabs-appstore/sugarappstore-static
         git clone https://github.com/sugarlabs-appstore/sugarappstore/
         cd sugarappstore
-        git checkout oop-ss
         echo "checking out oop-ss"
         python3 -m pip install -r requirements.txt
         ls ../activities
