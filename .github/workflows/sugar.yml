@@ -96,14 +96,13 @@ jobs:
       run: |
         export PATH=$PATH:$SUGAR_PATH
         echo "clone static"
-        git clone https://github.com/sugarlabs-appstore/sugarappstore-static
-        git clone https://github.com/sugarlabs-appstore/sugarappstore/
-        cd sugarappstore
+        git clone https://github.com/sugarlabs-appstore/aslo-v4
+        cd aslo-v4
         echo "checking out dev"
         python3 -m pip install -r requirements.txt
         ls ../activities
-        python3 -m saasbuild -i $(realpath ../activities/repos/sugarlabs) -Pvfsbguyz -p ../sugarappstore-static -x https://sugarstore.netlify.app
-        tar -czvf saas.tar.gz ./saas_compiled
+        python3 -m aslo4 -i $(realpath ../activities/repos/sugarlabs) -Pvfsbguyz -p ./aslo4-static -x https://sugarstore.netlify.app
+        tar -czvf aslo4.tar.gz ./aslo4-compiled
         cd ..
  
     - name: Release
@@ -114,9 +113,9 @@ jobs:
         prerelease: true
         title: "Continuous"
         files: |
-          sugarappstore/saas.tar.gz
-          sugarappstore/saas_compiled/index.json
-          sugarappstore/saas_compiled/sitemap.xml
+          aslo-v4/aslo4.tar.gz
+          aslo-v4/aslo4-compiled/index.json
+          aslo-v4/aslo4-compiled/sitemap.xml
 
     - name: Trigger Build on Netlify
       env:

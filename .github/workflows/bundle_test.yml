@@ -91,34 +91,33 @@ jobs:
           git clone $i
         done
         cd ..
-    
+
     - name: Get tools
       run: |
         export PATH=$PATH:$SUGAR_PATH
         echo "clone static"
-        git clone https://github.com/sugarlabs-appstore/sugarappstore-static
-        git clone https://github.com/sugarlabs-appstore/sugarappstore/
-        cd sugarappstore
+        git clone https://github.com/sugarlabs-appstore/aslo-v4.git
+        cd aslo-v4
         echo "checking out oop-ss"
         python3 -m pip install -r requirements.txt
         ls ../activities
         echo "checking if the activity is visible"
-        python3 -m saasbuild -i $(realpath ../activities) -l
+        python3 -m aslo4 -i $(realpath ../activities) -l
         echo "building bundle and regenerating appstore"
-        python3 -m saasbuild -i $(realpath ../activities) -b -g -p ../sugarappstore-static -u
-        echo "Compressing and prepareing for upload"
-        tar -czvf saas.tar.gz ./saas_compiled
+        python3 -m aslo4 -i $(realpath ../activities) -b -g -p ./aslo4-static -Pvfsbguyz
+        echo "Compressing and preparing for upload"
+        tar -czvf aslo4-activity.tar.gz ./aslo4-compiled
         cd ..
 
     - uses: actions/upload-artifact@v2
       with:
         name: bundle-xo.xo
-        path: sugarappstore/saas_compiled/bundles/**
+        path: aslo-v4/aslo4-compiled/bundles/**
     
     - uses: actions/upload-artifact@v2
       with:
-        name: SAAS_sugar-activtiy-store.tar.gz
-        path: sugarappstore/saas.tar.gz
+        name: aslo4-activity.tar.gz
+        path: sugarappstore/aslo4-activity.tar.gz
 
 
     - name: Comment PR
