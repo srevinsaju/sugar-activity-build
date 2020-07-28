@@ -101,7 +101,7 @@ jobs:
         echo "checking out dev"
         python3 -m pip install -r requirements.txt
         ls ../activities
-        python3 -m aslo4 -i $(realpath ../activities/repos/sugarlabs) -Pvfsbguyz -p ./aslo4-static -x https://sugarstore.netlify.app
+        python3 -m aslo4 -i $(realpath ../activities/repos/sugarlabs) -CPvfsbguyz -p ./aslo4-static -x https://sugarstore.netlify.app
         tar -czvf aslo4.tar.gz ./aslo4-compiled
         cd ..
  
