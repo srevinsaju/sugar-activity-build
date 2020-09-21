@@ -96,7 +96,7 @@ jobs:
       run: |
         export PATH=$PATH:$SUGAR_PATH
         echo "clone static"
-        git clone https://github.com/sugarlabs-appstore/aslo-v4
+        git clone https://github.com/sugarlabs/aslo-v4
         cd aslo-v4
         echo "checking out dev"
         python3 -m pip install -r requirements.txt
